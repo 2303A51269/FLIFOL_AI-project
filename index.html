@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIFOL - File and Folder Organizer for Languages</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="app-title">FLIFOL</h1>
+            </div>
+            <div class="toolbar-buttons">
+                <button id="addFolderBtn" class="btn btn-primary">➕ Add Folder</button>
+                <button id="addFileBtn" class="btn btn-primary">📄 Add File</button>
+                <button id="saveCodeBtn" class="btn btn-success">💾 Save Code</button>
+                <button id="downloadBtn" class="btn btn-info">⬇️ Download Project</button>
+            </div>
+        </div>
+
+        <!-- AI Prompt Section -->
+        <div class="ai-section">
+            <div class="ai-input-container">
+                <input 
+                    type="text" 
+                    id="aiPrompt" 
+                    class="ai-input" 
+                    placeholder="📝 Describe your project: 'Create frontend html css and backend node with login page'"
+                />
+                <button id="generateBtn" class="btn btn-generate">Generate Structure</button>
+            </div>
+            <div id="aiResponse" class="ai-response"></div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- File Explorer Panel -->
+            <div class="file-explorer">
+                <div class="explorer-header">
+                    <h3>📂 Project Structure</h3>
+                    <button id="newProjectBtn" class="btn-small">New</button>
+                </div>
+                <div id="fileTree" class="file-tree">
+                    <div class="tree-item empty-state">
+                        <p>No files yet. Add files or generate structure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Editor Panel -->
+            <div class="editor-panel">
+                <div class="editor-header">
+                    <div class="file-tabs">
+                        <div id="tabContainer" class="tab-container">
+                            <div class="empty-tab">
+                                <p>Select a file to edit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <textarea 
+                    id="codeEditor" 
+                    class="code-editor" 
+                    placeholder="Write your code here..."
+                    spellcheck="false"
+                ></textarea>
+                <div class="editor-footer">
+                    <span id="fileInfo">No file selected</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding files/folders -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Item</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input 
+                    type="text" 
+                    id="itemName" 
+                    class="modal-input" 
+                    placeholder="Enter name (e.g., 'index.html' or 'frontend')"
+                />
+                <div class="modal-note" id="modalNote"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCancel" class="btn btn-secondary">Cancel</button>
+                <button id="modalConfirm" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Action</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmCancel" class="btn btn-secondary">Cancel</button>
+                <button id="confirmOk" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
